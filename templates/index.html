@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Peças Automotivas</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Lista de Peças</h1>
+    <a href="{{ url_for('nova') }}">Cadastrar Novo Item</a>
+
+    <form method="GET" action="{{ url_for('index') }}">
+      <input
+        type="text"
+        name="buscar"
+        placeholder="Buscar por código ou descrição"
+        value="{{ filtro if filtro else '' }}"
+      />
+      <button type="submit">Buscar</button>
+      {% if filtro %}
+      <a href="{{ url_for('index') }}">Limpar</a>
+      {% endif %}
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <table>
+      <tr>
+        <th>Código</th>
+        <th>Descrição</th>
+        <th>Fabricante</th>
+        <th>Aplicação</th>
+        <th>Ações</th>
+      </tr>
+      {% for peca in pecas %}
+      <tr>
+        <td>{{ peca.id_codigo }}</td>
+        <td>{{ peca.descricao }}</td>
+        <td>{{ peca.fabricante }}</td>
+        <td>{{ peca.aplicacao }}</td>
+        <td>
+          <a href="{{ url_for('editar', id_codigo=peca.id_codigo) }}">Editar</a>
+          |
+          <a href="{{ url_for('deletar', id_codigo=peca.id_codigo) }}"
+            >Excluir</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
