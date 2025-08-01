@@ -2,47 +2,70 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>{% if peca %}Editar{% else %}Cadastrar{% endif %} Item</title>
+    <title>Cadastro de Peça</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
   </head>
   <body>
-    <h1>{% if peca %}Editar{% else %}Cadastrar{% endif %} Item</h1>
+    <div class="form-container">
+      <h1>{% if peca %}Editar{% else %}Cadastrar{% endif %} Peça</h1>
 
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %}
-    <ul>
-      {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
+      <form method="POST">
+        <label for="codigo">Código:</label>
+        <input
+          type="text"
+          id="codigo"
+          name="codigo"
+          placeholder="Insira o Código"
+          value="{{ peca.codigo if peca else '' }}"
+          {%
+          if
+          peca
+          %}readonly{%
+          endif
+          %}
+          required
+        />
 
-    <form method="POST">
-      <input
-        name="codigo"
-        placeholder="Código"
-        value="{{ peca.id_codigo if peca else '' }}"
-        required
-      /><br />
-      <input
-        name="descricao"
-        placeholder="Descrição"
-        value="{{ peca.descricao if peca else '' }}"
-        required
-      /><br />
-      <input
-        name="fabricante"
-        placeholder="Fabricante"
-        value="{{ peca.fabricante if peca else '' }}"
-        required
-      /><br />
-      <input
-        name="aplicacao"
-        placeholder="Aplicação"
-        value="{{ peca.aplicacao if peca else '' }}"
-        required
-      /><br />
-      <button type="submit">Salvar</button>
-    </form>
-    <a href="{{ url_for('index') }}"><button type="submit">Voltar</button></a>
+        <label for="descricao">Descrição:</label>
+        <input
+          type="text"
+          id="descricao"
+          name="descricao"
+          placeholder="Insira a Descrição"
+          value="{{ peca.descricao if peca else '' }}"
+          required
+        />
+
+        <label for="fabricante">Fabricante:</label>
+        <input
+          type="text"
+          id="fabricante"
+          name="fabricante"
+          placeholder="Insira o Fabricante"
+          value="{{ peca.fabricante if peca else '' }}"
+          required
+        />
+
+        <label for="aplicacao">Aplicação:</label>
+        <input
+          type="text"
+          id="aplicacao"
+          name="aplicacao"
+          placeholder="Insira a Aplicação"
+          value="{{ peca.aplicacao if peca else '' }}"
+          required
+        />
+
+        <div class="button-group">
+          <button type="submit">Salvar</button>
+          <a href="{{ url_for('index') }}"
+            ><button type="button">Voltar</button></a
+          >
+        </div>
+      </form>
+    </div>
   </body>
 </html>

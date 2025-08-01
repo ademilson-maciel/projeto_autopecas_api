@@ -16,6 +16,7 @@
       <input
         type="text"
         name="buscar"
+        class="buscar"
         placeholder="Buscar por código ou descrição"
         value="{{ filtro if filtro else '' }}"
       />
@@ -33,30 +34,33 @@
       {% endfor %}
     </ul>
     {% endif %} {% endwith %}
-
-    <table>
-      <tr>
-        <th>Código</th>
-        <th>Descrição</th>
-        <th>Fabricante</th>
-        <th>Aplicação</th>
-        <th>Ações</th>
-      </tr>
-      {% for peca in pecas %}
-      <tr>
-        <td>{{ peca.id_codigo }}</td>
-        <td>{{ peca.descricao }}</td>
-        <td>{{ peca.fabricante }}</td>
-        <td>{{ peca.aplicacao }}</td>
-        <td>
-          <a href="{{ url_for('editar', id_codigo=peca.id_codigo) }}">Editar</a>
-          |
-          <a href="{{ url_for('deletar', id_codigo=peca.id_codigo) }}"
-            >Excluir</a
-          >
-        </td>
-      </tr>
-      {% endfor %}
-    </table>
+    <div class="tabela-container">
+      <table>
+        <tr>
+          <th>Código</th>
+          <th>Descrição</th>
+          <th>Fabricante</th>
+          <th>Aplicação</th>
+          <th>Ações</th>
+        </tr>
+        {% for peca in pecas %}
+        <tr>
+          <td>{{ peca.id_codigo }}</td>
+          <td>{{ peca.descricao }}</td>
+          <td>{{ peca.fabricante }}</td>
+          <td>{{ peca.aplicacao }}</td>
+          <td>
+            <a href="{{ url_for('editar', id_codigo=peca.id_codigo) }}"
+              >Editar</a
+            >
+            |
+            <a href="{{ url_for('deletar', id_codigo=peca.id_codigo) }}"
+              >Excluir</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
   </body>
 </html>
