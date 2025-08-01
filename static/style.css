@@ -17,7 +17,7 @@ td {
   border: 1px solid #333;
   border-collapse: collapse;
   padding: 7px;
-  margin: 10px 0px 10px auto;
+  margin: 0px auto;
 }
 
 a {
@@ -44,7 +44,7 @@ tbody tr:nth-child(odd) {
 
 .tabela-container {
   width: 95%; /* ou a largura desejada */
-  height: 300px; /* ou a altura desejada */
+  height: 350px; /* ou a altura desejada */
   overflow: auto; /* ou overflow: scroll; */
 }
 
